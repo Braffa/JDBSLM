@@ -1,0 +1,9 @@
+target
+.settings
+sellMyThings.tmp
+.classpath
+.data
+.lck
+.log
+sellMyThings.properties
+sellMyThings.script
