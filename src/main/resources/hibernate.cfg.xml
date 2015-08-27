@@ -15,6 +15,7 @@
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<!-- property name="hbm2ddl.auto">create</property -->
 		<!-- JDBC connection pool (use the built-in) -->
+		<property name="hibernate.connection.autocommit">true</property>
 		<property name="connection.pool_size">10</property>
 		<property name="current_session_context_class">thread</property>
 		<mapping class="com.braffa.sellem.model.hbn.entity.Login"></mapping>
