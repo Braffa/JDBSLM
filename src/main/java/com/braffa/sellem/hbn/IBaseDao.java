@@ -11,6 +11,8 @@ public interface IBaseDao {
 	public Object read();
 
 	public Object readAll();
+	
+	public Object readListOfKeys();
 
 	public Object update();
 	

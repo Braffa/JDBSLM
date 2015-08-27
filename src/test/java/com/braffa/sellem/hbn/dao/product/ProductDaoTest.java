@@ -101,6 +101,7 @@ public class ProductDaoTest {
 		xmlFormatter.formatXmlProducts(products);
 
 		// test readAll
+		
 
 		xmlProductMsg = new XmlProductMsg();
 		xmlProduct = new XmlProduct();
@@ -120,6 +121,29 @@ public class ProductDaoTest {
 				6, lOfProducts.size());
 		System.out.println("productDaoTest readAll start");
 		xmlFormatter.formatXmlProducts(products);
+		
+		// read list of products
+		
+		lOfProducts = new ArrayList<XmlProduct>();
+		XmlProduct product = new XmlProduct();
+		product.setProductid("9780789724410");
+		lOfProducts.add(product);
+		product = new XmlProduct();
+		product.setProductid("9780789799999");
+		lOfProducts.add(product);
+		product = new XmlProduct();
+		product.setProductid("978098056856");
+		lOfProducts.add(product);
+		xmlProductMsg = new XmlProductMsg();
+		xmlProductMsg.setLOfProducts(lOfProducts);
+		productDao = new ProductDao(xmlProductMsg);
+		System.out.println("productDaoTest readLOfProducts start");
+		xmlFormatter.formatXmlProducts(xmlProductMsg);
+		products = (XmlProductMsg) productDao.readListOfKeys();
+		assertEquals("read failed success flag not set correctly", "true",
+				products.getSuccess());
+		assertEquals("readLOfProducts expected 3 rows returned", 3,
+				products.getLOfProducts().size());	
 
 		// test createProduct
 

@@ -206,4 +206,10 @@ public class UserToProductDao extends Dao {
 		return null;
 	}
 
+	@Override
+	public Object readListOfKeys() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

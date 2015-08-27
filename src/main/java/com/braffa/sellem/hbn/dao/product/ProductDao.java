@@ -103,6 +103,45 @@ public class ProductDao extends Dao {
 		}
 		return xmlProductMsg;
 	}
+	
+	public XmlProductMsg readListOfKeys () {
+		if (logger.isDebugEnabled()) {
+			logger.debug("readSome productid");
+		}
+		Session session = getHibernateSessionFactory().openSession();
+		try {
+			StringBuffer sql = new StringBuffer("From Product WHERE ");
+			int index = xmlProductMsg.getLOfProducts().size();
+			int count = 0;
+			for (XmlProduct product : xmlProductMsg.getLOfProducts()) {
+				sql.append("(productId = '" + product.getProductid() + "')" );
+				count++;
+				if (index > 1 && count < index) {
+					sql.append(" or ");
+				}
+			}
+			System.out.println("sql " + sql.toString());
+			Query q = session.createQuery(sql.toString());
+			List<Product> lOfProducts = q.list();
+			if (lOfProducts.size() > 0) {
+				ArrayList<XmlProduct> lOfxmlProduct = new ArrayList<XmlProduct>();
+				for (Product product : lOfProducts) {
+					XmlProduct xmlProduct = new XmlProduct(product);
+					lOfxmlProduct.add(xmlProduct);
+				}
+				xmlProductMsg.setLOfProducts(lOfxmlProduct);
+				xmlProductMsg.setSuccess("true");
+			} else {
+				ArrayList<XmlProduct> lOfxmlProduct = new ArrayList<XmlProduct>();
+				xmlProductMsg.setLOfProducts(lOfxmlProduct);
+				xmlProductMsg.setSuccess("false");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			xmlProductMsg.setSuccess("false");
+		}
+		return xmlProductMsg;
+	}
 
 	@Override
 	public XmlProductMsg readAll() {
