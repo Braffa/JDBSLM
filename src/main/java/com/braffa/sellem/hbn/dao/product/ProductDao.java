@@ -106,7 +106,7 @@ public class ProductDao extends Dao {
 	
 	public XmlProductMsg readListOfKeys () {
 		if (logger.isDebugEnabled()) {
-			logger.debug("readSome productid");
+			logger.debug("readListOfKeys");
 		}
 		Session session = getHibernateSessionFactory().openSession();
 		try {

@@ -223,7 +223,7 @@ public class UserToProductDaoTest {
 		userToProductDao.delete();
 
 		count = userToProductDao.getCount();
-		assertEquals("getCount failed Incorrect number of rows ", 10, count);
+		assertEquals("getCount failed Incorrect number of rows ", 11, count);
 
 	}
 

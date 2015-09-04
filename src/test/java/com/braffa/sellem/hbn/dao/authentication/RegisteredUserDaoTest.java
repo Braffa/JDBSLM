@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.junit.AfterClass;
@@ -108,7 +109,32 @@ public class RegisteredUserDaoTest {
 				4, actualXmlRegisteredUsers.getLOfRegisteredUsers().size());
 		System.out.println("test readAll result");
 		xmlFormatter.formatXmlRegisteredUsers(registeredUserMsg);
-
+		
+		// read by list of keys
+		registeredUserMsg = new XmlRegisteredUserMsg();
+		
+		ArrayList<XmlRegisteredUser> lOfRegisteredUsers = new ArrayList<XmlRegisteredUser>();
+		Login login1 = new Login(); 
+		login1.setUserId("Braffa");
+		XmlRegisteredUser registeredUser1 = new XmlRegisteredUser();
+		registeredUser1.setLogin(login1);
+		lOfRegisteredUsers.add(registeredUser1);
+		Login login2 = new Login(); 
+		login2.setUserId("georgie");
+		XmlRegisteredUser registeredUser2 = new XmlRegisteredUser();
+		registeredUser2.setLogin(login2);
+		lOfRegisteredUsers.add(registeredUser2);
+		Login login3 = new Login(); 
+		login3.setUserId("SUE123");
+		XmlRegisteredUser registeredUser3 = new XmlRegisteredUser();
+		registeredUser3.setLogin(login3);
+		lOfRegisteredUsers.add(registeredUser3);
+		registeredUserMsg.setLOfRegisteredUsers(lOfRegisteredUsers);
+		System.out.println("test read by list of keys start");
+		xmlFormatter.formatXmlRegisteredUsers(registeredUserMsg);
+		registeredUserDao = new RegisteredUserDao(registeredUserMsg);
+		actualXmlRegisteredUsers = (XmlRegisteredUserMsg)registeredUserDao.readListOfKeys();
+		assertEquals("readListOfKeys failed Incorrect number of rows ", 3, actualXmlRegisteredUsers.getLOfRegisteredUsers().size());
 
 		// test create registered user
 
@@ -228,6 +254,11 @@ public class RegisteredUserDaoTest {
 				expectedLOfRegisteredUsers.get(0).getTelephone());
 		System.out.println("test update telephone result");
 		xmlFormatter.formatXmlRegisteredUsers(expectedXmlRegisteredUsers);
+		
+		
+		
+		
+		
 	}
 
 }

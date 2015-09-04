@@ -10,9 +10,11 @@ import org.hibernate.Session;
 
 import com.braffa.sellem.hbn.Dao;
 import com.braffa.sellem.hbn.HibernateUtil;
+import com.braffa.sellem.model.hbn.entity.Product;
 import com.braffa.sellem.model.hbn.entity.RegisteredUser;
 import com.braffa.sellem.model.xml.authentication.XmlRegisteredUser;
 import com.braffa.sellem.model.xml.authentication.XmlRegisteredUserMsg;
+import com.braffa.sellem.model.xml.product.XmlProduct;
 
 public class RegisteredUserDao extends Dao {
 
@@ -204,7 +206,35 @@ public class RegisteredUserDao extends Dao {
 
 	@Override
 	public Object readListOfKeys() {
-		// TODO Auto-generated method stub
-		return null;
+		if (logger.isDebugEnabled()) {
+			logger.debug("readListOfKeys");
+		}
+		Session session = getHibernateSessionFactory().openSession();
+		try {
+			StringBuffer sql = new StringBuffer("From RegisteredUser WHERE ");
+			int index = xmlRegisteredUserMsg.getLOfRegisteredUsers().size();
+			int count = 0;
+			for (XmlRegisteredUser registeredUser : xmlRegisteredUserMsg.getLOfRegisteredUsers()) {
+				sql.append("(userId = '" + registeredUser.getLogin().getUserId() + "')" );
+				count++;
+				if (index > 1 && count < index) {
+					sql.append(" or ");
+				}
+			}
+			System.out.println("sql " + sql.toString());
+			Query q = session.createQuery(sql.toString());
+			List<RegisteredUser> lOfRegisteredUsers = q.list();
+			ArrayList<XmlRegisteredUser> lOfXmlRegisteredUsers = new ArrayList<XmlRegisteredUser>();
+			for (RegisteredUser registeredUser : lOfRegisteredUsers) {
+				XmlRegisteredUser xmlRegisteredUser = new XmlRegisteredUser(
+						registeredUser);
+				lOfXmlRegisteredUsers.add(xmlRegisteredUser);
+			}
+			xmlRegisteredUserMsg.setLOfRegisteredUsers(lOfXmlRegisteredUsers);
+			xmlRegisteredUserMsg.setSuccess("true");
+		} catch (Exception e) {
+			xmlRegisteredUserMsg.setSuccess("false");
+		}
+		return xmlRegisteredUserMsg;
 	}
 }

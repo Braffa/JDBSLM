@@ -69,8 +69,7 @@ public class UserToProductDao extends Dao {
 			sql.append(xmlUserToProduct.getProductId());
 			sql.append("' AND USERID = '");
 			sql.append(xmlUserToProduct.getUserId());
-			sql.append("' AND PRODUCTINDEX = ");
-			sql.append(xmlUserToProduct.getProductIndex());
+			sql.append("'");
 			Session session = this.getHibernateSessionFactory().openSession();
 			session.beginTransaction();
 			Query q = session.createQuery(sql.toString());
