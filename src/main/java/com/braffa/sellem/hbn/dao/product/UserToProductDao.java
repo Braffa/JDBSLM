@@ -179,14 +179,19 @@ public class UserToProductDao extends Dao {
 			Session session = this.getHibernateSessionFactory().openSession();
 			Query q = session.createQuery(sql.toString());
 			List<UserToProduct> lOfUserToProducts = q.list();
-			ArrayList<XmlUserToProduct> lOfXmlUserToProducts = new ArrayList<XmlUserToProduct>();
-			for (UserToProduct userToProduct : lOfUserToProducts) {
-				XmlUserToProduct readUserToProduct = new XmlUserToProduct(
-						userToProduct);
-				lOfXmlUserToProducts.add(readUserToProduct);
+			if (lOfUserToProducts.size() > 0) {
+				ArrayList<XmlUserToProduct> lOfXmlUserToProducts = new ArrayList<XmlUserToProduct>();
+				for (UserToProduct userToProduct : lOfUserToProducts) {
+					XmlUserToProduct readUserToProduct = new XmlUserToProduct(
+							userToProduct);
+					lOfXmlUserToProducts.add(readUserToProduct);
+				}
+				xmlUserToProductMsg
+						.setLOfXmlUserToProduct(lOfXmlUserToProducts);
+				xmlUserToProductMsg.setSuccess("true");
+			} else {
+				xmlUserToProductMsg.setSuccess("false");
 			}
-			xmlUserToProductMsg.setLOfXmlUserToProduct(lOfXmlUserToProducts);
-			xmlUserToProductMsg.setSuccess("true");
 		} catch (Exception e) {
 			xmlUserToProductMsg.setSuccess("false");
 		}

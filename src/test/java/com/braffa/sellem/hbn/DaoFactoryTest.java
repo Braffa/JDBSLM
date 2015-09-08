@@ -62,7 +62,7 @@ public class DaoFactoryTest {
 		xmlFormatter.formatXMLLogins(actualXmlLogins);
 		
 		XmlRegisteredUser registeredUser = new XmlRegisteredUser();
-		Login login = new Login();
+		XmlLogin login = new XmlLogin();
 		registeredUser.setLogin(login);
 		registeredUser.getLogin().setUserId("Braffa");
 		XmlRegisteredUserMsg xmlRegisteredUserMsg = new XmlRegisteredUserMsg(registeredUser);

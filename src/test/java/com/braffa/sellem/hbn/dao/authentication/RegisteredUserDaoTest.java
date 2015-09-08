@@ -15,6 +15,7 @@ import org.junit.Test;
 import com.braffa.sellem.dao.utility.mysql.MySQLSetUp;
 import com.braffa.sellem.hbn.Dao;
 import com.braffa.sellem.model.hbn.entity.Login;
+import com.braffa.sellem.model.xml.authentication.XmlLogin;
 import com.braffa.sellem.model.xml.authentication.XmlRegisteredUser;
 import com.braffa.sellem.model.xml.authentication.XmlRegisteredUserMsg;
 import com.braffa.sellem.model.xml.formatter.XmlFormatter;
@@ -60,7 +61,7 @@ public class RegisteredUserDaoTest {
 		// test getRegisteredUser
 		
 		registeredUser = new XmlRegisteredUser();
-		Login login = new Login();
+		XmlLogin login = new XmlLogin();
 		registeredUser.setLogin(login);
 		registeredUser.getLogin().setUserId("Braffa");
 		registeredUserMsg = new XmlRegisteredUserMsg(registeredUser);
@@ -95,7 +96,7 @@ public class RegisteredUserDaoTest {
 		// test getAllRegisteredUser
 
 		registeredUser = new XmlRegisteredUser();
-		login = new Login();
+		login = new XmlLogin();
 		registeredUser.setLogin(login);
 		registeredUserMsg = new XmlRegisteredUserMsg(registeredUser);
 		System.out.println("test read start");
@@ -114,17 +115,17 @@ public class RegisteredUserDaoTest {
 		registeredUserMsg = new XmlRegisteredUserMsg();
 		
 		ArrayList<XmlRegisteredUser> lOfRegisteredUsers = new ArrayList<XmlRegisteredUser>();
-		Login login1 = new Login(); 
+		XmlLogin login1 = new XmlLogin(); 
 		login1.setUserId("Braffa");
 		XmlRegisteredUser registeredUser1 = new XmlRegisteredUser();
 		registeredUser1.setLogin(login1);
 		lOfRegisteredUsers.add(registeredUser1);
-		Login login2 = new Login(); 
+		XmlLogin login2 = new XmlLogin(); 
 		login2.setUserId("georgie");
 		XmlRegisteredUser registeredUser2 = new XmlRegisteredUser();
 		registeredUser2.setLogin(login2);
 		lOfRegisteredUsers.add(registeredUser2);
-		Login login3 = new Login(); 
+		XmlLogin login3 = new XmlLogin(); 
 		login3.setUserId("SUE123");
 		XmlRegisteredUser registeredUser3 = new XmlRegisteredUser();
 		registeredUser3.setLogin(login3);
@@ -145,7 +146,7 @@ public class RegisteredUserDaoTest {
 		registeredUser.setLastname("Mills");
 		registeredUser.setTelephone("01388 445561");
 		registeredUser.setUpdDate(new Date());
-		registeredUser.setLogin(new Login());
+		registeredUser.setLogin(new XmlLogin());
 		registeredUser.getLogin().setUserId("gordon");
 		registeredUserMsg = new XmlRegisteredUserMsg(registeredUser);
 		System.out.println("test create start");
@@ -159,7 +160,7 @@ public class RegisteredUserDaoTest {
 		// test deleteRegisteredUser
 		
 		registeredUser = new XmlRegisteredUser();
-		login = new Login();
+		login = new XmlLogin();
 		registeredUser.setLogin(login);
 		registeredUser.getLogin().setUserId("gordon");
 		registeredUserMsg = new XmlRegisteredUserMsg(registeredUser);
@@ -176,7 +177,7 @@ public class RegisteredUserDaoTest {
 		// test updateRegisteredUser - email
 
 		registeredUser = new XmlRegisteredUser();
-		registeredUser.setLogin(new Login());
+		registeredUser.setLogin(new XmlLogin());
 		registeredUser.getLogin().setUserId("Braffa");
 		registeredUser.setEmail("dave.brayfield@gmail.com");
 		registeredUserMsg = new XmlRegisteredUserMsg(registeredUser);
@@ -197,7 +198,7 @@ public class RegisteredUserDaoTest {
 		// test updateRegisteredUser - first name
 		
 		registeredUser = new XmlRegisteredUser();
-		registeredUser.setLogin(new Login());
+		registeredUser.setLogin(new XmlLogin());
 		registeredUser.getLogin().setUserId("Braffa");
 		registeredUser.setFirstname("Paul");
 		registeredUserMsg = new XmlRegisteredUserMsg(registeredUser);
@@ -218,7 +219,7 @@ public class RegisteredUserDaoTest {
 		// test updateRegisteredUser - last name
 		
 		registeredUser = new XmlRegisteredUser();
-		registeredUser.setLogin(new Login());
+		registeredUser.setLogin(new XmlLogin());
 		registeredUser.getLogin().setUserId("Braffa");
 		registeredUser.setLastname("Davison");
 		registeredUserMsg = new XmlRegisteredUserMsg(registeredUser);
@@ -238,7 +239,7 @@ public class RegisteredUserDaoTest {
 		// test updateRegisteredUser - telephone
 		
 		registeredUser = new XmlRegisteredUser();
-		registeredUser.setLogin(new Login());
+		registeredUser.setLogin(new XmlLogin());
 		registeredUser.getLogin().setUserId("Braffa");
 		registeredUser.setTelephone("07525 641834");
 		registeredUserMsg = new XmlRegisteredUserMsg(registeredUser);
